@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+<title>LOGIN PI-DEV CMS</title>
+<link rel="icon" href="{{ asset('images/piarea.png') }}" type="image/x-icon">
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

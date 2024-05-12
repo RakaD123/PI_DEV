@@ -1,6 +1,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="piarea.">
+    <link rel="icon" href="{{ asset('images/piarea.png') }}" type="image/x-icon">
     <meta name="description" content="piarea apps.">
     <meta name="description" content="piarea mockup.">
     <title>PI-DEV | Application developed by PIAREA</title>
@@ -101,13 +102,20 @@
                 </a>
                 <div class="card-body">
                     <div>
-                        <b><h7 class="card-title" style="font-size: 24px; font-family: Abril Fatface;" title="{{ $product->name }}">{{ substr($product->name, 0, 30) }}{{ strlen($product->name) > 30 ? '...' : '' }} <span class="badge rounded-pill bg-dark">{{ $product->category }}</span></h7></b>
+                        <b>
+                            <h7 class="card-title" style="font-size: 24px; font-family: Abril Fatface;" title="{{ $product->name }}">
+                                {{ substr($product->name, 0, 15) }}{{ strlen($product->name) > 15 ? '...' : '' }}
+                                <span class="badge rounded-pill bg-dark" style="font-size: 15px;">{{ $product->category }}</span>
+                            </h7>
+                        </b>
+
                     </div>
-                    <p class="card-text" style="font-family: abel;" title="{{ $product->detail }}">{{ substr($product->detail, 0, 50) }}{{ strlen($product->detail) > 50 ? '...' : '' }}</p>
+                    <p class="card-text" style="font-family: abel;" title="{{ $product->detail }}">{{ substr($product->detail, 0, 60) }}{{ strlen($product->detail) > 60 ? '...' : '' }}</p>
                 </div>
             </div>
         </div>
     @endforeach
+
 
       @unless ($products->count())
       <div class="no-results-message">

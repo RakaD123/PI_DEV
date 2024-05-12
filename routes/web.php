@@ -30,10 +30,6 @@ Route::get('/edit/{product}', [ProductController::class, 'edit'])->name('edit')-
 Route::put('/edit/{product}', [ProductController::class, 'update'])->name('update')->middleware('auth');
 Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy')->middleware('auth');
 
+Route::view('password/reset', 'auth.passwords.email')->name('password.request');
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
-
-
-//Route::get('show/{product}', 'ProductController@show')->name('show');
-//Route::get('edit/{product}', 'ProductController@edit')->name('edit');
-//Route::put('edit/{product}','ProductController@update')->name('update');
-//Route::delete('/{product}','ProductController@destroy')->name('destroy');

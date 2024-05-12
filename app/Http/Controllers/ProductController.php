@@ -40,12 +40,12 @@ class ProductController extends Controller
         return view('create');
     }
 
-
+     //buat store
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'regex:/^[a-zA-Z0-9\s]+$/','max:50'],
-            'detail' => ['required', 'regex:/^[a-zA-Z0-9\s]+$/', 'max:100'],
+            'name' => ['required', 'max:50', 'not_regex:/<\s*(script|php|html)/i'],
+            'detail' => ['required',  'max:100', 'not_regex:/<\s*(script|php|html)/i'],
             'url' => 'required',
             'category' => 'required',
             'date' => 'required',
@@ -100,8 +100,8 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            'name' => ['required', 'regex:/^[a-zA-Z0-9\s]+$/','max:50'], // Hanya huruf, angka, dan spasi yang diperbolehkan
-            'detail' => ['required', 'regex:/^[a-zA-Z0-9\s]+$/', 'max:100'],
+            'name' => ['required', 'max:50', 'not_regex:/<\s*(script|php|html)/i'],
+            'detail' => ['required',  'max:100', 'not_regex:/<\s*(script|php|html)/i'],
             'category' => 'required',
             'url' => 'required',
             'date' => 'required',

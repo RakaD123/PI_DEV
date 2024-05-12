@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+<title>PI-DEV CMS</title>
+<link rel="icon" href="{{ asset('images/piarea.png') }}" type="image/x-icon">
+
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">

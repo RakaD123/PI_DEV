@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+<title>Create Product</title>
+<link rel="icon" href="{{ asset('images/piarea.png') }}" type="image/x-icon">
+
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -79,7 +82,7 @@
     function validateForm() {
         var productName = document.getElementById('productName').value;
         var productDetail = document.getElementById('productDetail').value;
-        var regex = /^[a-zA-Z0-9\s.,;:?!\"\'()\[\]\{\}\-–\/\.\.\.—~%\$<>^*&#+=]+$/;
+
 
 
 

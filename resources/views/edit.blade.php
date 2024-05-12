@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+<title>Update Product</title>
+<link rel="icon" href="{{ asset('images/piarea.png') }}" type="image/x-icon">
+
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -64,7 +67,8 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-md-6 text-center">
-                            <button type="submit" class="btn btn-success" onclick="return validateForm()">Update</button>
+                            <button type="submit" class="btn btn-success">Update</button>
+
 
 
                         </div>
@@ -82,7 +86,6 @@
     function validateForm() {
         var productName = document.getElementById('productName').value;
         var productDetail = document.getElementById('productDetail').value;
-        var regex = /^[a-zA-Z0-9\s.,;:?!\"\'()\[\]\{\}\-–\/\.\.\.—~%\$<>^*&#+=]+$/;
 
         // Menampilkan konfirmasi sebelum update
         var confirmation = confirm("Are you sure you want to update?");
