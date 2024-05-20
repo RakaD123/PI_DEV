@@ -157,10 +157,14 @@ class ProductController extends Controller
         $products->orderBy('date', $sortOrder); // Perubahan disini
         }
 
-        $products = $products->latest()->paginate(7);
+        $products = $products->latest()->get();
 
         return view('home', compact('products'));
 
+
+
+    return view('dashboard', compact('products'))
+        ->with('i', (request()->input('page', 1) - 1) * 7);
     }
 
 

@@ -104,13 +104,13 @@
                     <div>
                         <b>
                             <h7 class="card-title" style="font-size: 24px; font-family: Abril Fatface;" title="{{ $product->name }}">
-                                {{ substr($product->name, 0, 15) }}{{ strlen($product->name) > 15 ? '...' : '' }}
+                                {{ substr($product->name, 0, 50) }}{{ strlen($product->name) > 50 ? '...' : '' }}
                                 <span class="badge rounded-pill bg-dark" style="font-size: 15px;">{{ $product->category }}</span>
                             </h7>
                         </b>
 
                     </div>
-                    <p class="card-text" style="font-family: abel;" title="{{ $product->detail }}">{{ substr($product->detail, 0, 60) }}{{ strlen($product->detail) > 60 ? '...' : '' }}</p>
+                    <p class="card-text" style="font-family: abel;" title="{{ $product->detail }}">{{ substr($product->detail, 0, 100) }}{{ strlen($product->detail) > 100 ? '...' : '' }}</p>
                 </div>
             </div>
         </div>

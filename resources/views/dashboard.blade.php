@@ -17,26 +17,23 @@
     </div>
 
     <form action="dashboard" method="get" id="filterForm">
-
-
         <div class="row mb-3">
             <div class="col-sm-3">
-                <label for="" class="form-label">Product Name</label>
-                <input name="name" id="nameInput" type="text" class="form-control" placeholder="Name" value="{{ isset($_GET['name']) ? $_GET['name'] : '' }}">
+                <label for="nameInput" class="form-label">Product Name</label>
+                <input name="name" id="nameInput" type="text" class="form-control" placeholder="Name" value="{{ request()->get('name', '') }}">
             </div>
             <div class="col-sm-3">
-                <label for="" class="form-label">Category</label>
+                <label for="categorySelect" class="form-label">Category</label>
                 <select name="category" id="categorySelect" class="form-select">
-                    <option value="">MockUp & Apps (default)</option>
-                    <option value="MockUp" {{ isset($_GET['category']) && $_GET['category'] == 'MockUp' ? 'selected' : '' }}>MockUp</option>
-                    <option value="Apps" {{ isset($_GET['category']) && $_GET['category'] == 'Apps' ? 'selected' : '' }}>Apps</option>
+                    <option value="">All</option>
+                    <option value="MockUp" {{ request()->get('category') == 'MockUp' ? 'selected' : '' }}>MockUp</option>
+                    <option value="Apps" {{ request()->get('category') == 'Apps' ? 'selected' : '' }}>Apps</option>
                 </select>
             </div>
             <div class="col-sm-3">
                 <button type="submit" class="btn btn-primary mt-4">Filter</button>
                 <button type="button" class="btn btn-warning mt-4" onclick="refreshPage()">Refresh</button>
             </div>
-
         </div>
     </form>
 
@@ -47,7 +44,7 @@
             <th>Products</th>
             <th>Description</th>
             <th>Category</th>
-            <th>url</th>
+            <th>URL</th>
             <th>Product Published Date</th>
             <th width="280px">Action</th>
         </tr>
@@ -61,46 +58,42 @@
             <td><a href="{{ $product->url }}">{{ $product->url }}</a></td>
             <td>{{ $product->date }}</td>
             <td>
-                <form id="deleteForm{{ $product->id }}" action="{{ route('destroy',$product->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('show',$product->id) }}">Show</a>
-                    <a class="btn btn-primary" href="{{ route('edit',$product->id) }}">Edit</a>
+                <form id="deleteForm{{ $product->id }}" action="{{ route('destroy', $product->id) }}" method="POST">
+                    <a class="btn btn-info" href="{{ route('show', $product->id) }}">Show</a>
+                    <a class="btn btn-primary" href="{{ route('edit', $product->id) }}">Edit</a>
                     @csrf
                     @method('DELETE')
-                    <!-- Menggunakan JavaScript untuk menampilkan konfirmasi sebelum penghapusan -->
                     <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $product->id }}')">Delete</button>
                 </form>
             </td>
         </tr>
         @endforeach
     </table>
-</div>
-</div>
+
+    <div class="d-flex justify-content-center">
+        @if ($products->onFirstPage())
+            <span class="btn btn-secondary disabled">Previous</span>
+        @else
+            <a href="{{ $products->previousPageUrl() }}" class="btn btn-primary">Previous</a>
+        @endif
+
+        @if ($products->hasMorePages())
+            <a href="{{ $products->nextPageUrl() }}" class="btn btn-primary">Next</a>
+        @else
+            <span class="btn btn-secondary disabled">Next</span>
+        @endif
+    </div>
 </div>
 
-<!-- JavaScript untuk menampilkan konfirmasi sebelum penghapusan -->
 <script>
     function confirmDelete(productId) {
-        var confirmation = confirm("Are you sure you want to delete this product?");
-        if (confirmation) {
+        if (confirm("Are you sure you want to delete this product?")) {
             document.getElementById('deleteForm' + productId).submit();
         }
     }
-</script>
 
-<script>
     function refreshPage() {
-        var currentUrl = window.location.href; // Mendapatkan URL saat ini
-        var baseUrl = window.location.origin; // Mendapatkan base URL tanpa path
-
-        // Mengganti path dari currentUrl dengan "/dashboard"
-        var newUrl = baseUrl + "/dashboard";
-
-        // Mengarahkan ke halaman dashboard awal
-        window.location.href = newUrl;
+        window.location.href = "{{ url('/dashboard') }}";
     }
 </script>
-
-
-
-
 @endsection
